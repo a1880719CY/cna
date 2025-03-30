@@ -140,11 +140,13 @@ while True:
     # ProxyServer finds a cache hit
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
-    clientSocket.sendall(cacheData.encode('utf-8'))  #may have error if the result is a list, see if i need to fix later
+    print('hello')
+    clientSocket.sendall(cacheData.encode('utf-8'))
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
-    print ('> ' + cacheData)
+    print('> ' + ''.join(cacheData))  #bruhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh, why the school code will have bugssssssssssssssssssssssssssssssssssss
+
   except:
     # cache miss.  Get resource from origin server
     originServerSocket = None
