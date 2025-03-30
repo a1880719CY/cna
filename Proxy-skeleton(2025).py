@@ -140,6 +140,7 @@ while True:
     # ProxyServer finds a cache hit
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
+    connectionSocket.send(cacheData.encode('utf-8'))  #may have error if the result is a list, see if i need to fix later
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
@@ -150,6 +151,8 @@ while True:
     # Create a socket to connect to origin server
     # and store in originServerSocket
     # ~~~~ INSERT CODE ~~~~
+    originServerSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    originServerSocket.connect((hostname, 80))
     # ~~~~ END CODE INSERT ~~~~
 
     print ('Connecting to:\t\t' + hostname + '\n')
