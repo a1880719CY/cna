@@ -77,7 +77,7 @@ while True:
   # Accept connection from client and store in the clientSocket
   try:
     # ~~~~ INSERT CODE ~~~~
-    connectionSocket, addr = serverSocket.accept()
+    clientSocket, addr = serverSocket.accept()
     # ~~~~ END CODE INSERT ~~~~
     print ('Received a connection')
   except:
@@ -140,7 +140,7 @@ while True:
     # ProxyServer finds a cache hit
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
-    connectionSocket.sendall(cacheData.encode('utf-8'))  #may have error if the result is a list, see if i need to fix later
+    clientSocket.sendall(cacheData.encode('utf-8'))  #may have error if the result is a list, see if i need to fix later
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
@@ -198,7 +198,7 @@ while True:
 
       # Send the response to the client
       # ~~~~ INSERT CODE ~~~~
-      connectionSocket.sendall(cacheData)  #may have error if the result is a list, see if i need to fix later
+      clientSocket.sendall(cacheData)  #may have error if the result is a list, see if i need to fix later
       # ~~~~ END CODE INSERT ~~~~
 
       # Create a new file in the cache for the requested file.
