@@ -141,7 +141,12 @@ while True:
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
     print('hello')
-    clientSocket.sendall(cacheData.encode('utf-8'))
+    try:
+      for line in cacheData:
+        clientSocket.send(line.encode('utf-8'))
+    except:
+      print("it bugged")
+
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
@@ -186,7 +191,7 @@ while True:
         print ('> ' + line)
 
       try:
-        originServerSocket.sendall(request.encode())
+        originServerSocket.sendall(request.encode('utf-8'))
       except socket.error:
         print ('Forward request to origin failed')
         sys.exit()
@@ -213,6 +218,7 @@ while True:
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
       cacheFile.write(cacheData)
+
       # ~~~~ END CODE INSERT ~~~~
       cacheFile.close()
       print ('cache file closed')
