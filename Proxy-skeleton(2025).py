@@ -14,9 +14,10 @@
 #"good.tumblr.com","share_likes":true,"likes":430}}}
 
 
-#port number is commly 8080
+#port number is commly 8080 but lecture say don't use it?
 #host:depends on the get request, port number:80
 #where get:if in cache then done, if not then find orgin server
+#localhost: 127.0.0.1
 
 
 # Include the libraries for socket and system calls
@@ -41,6 +42,9 @@ proxyPort = int(args.port)
 try:
   # Create a server socket
   # ~~~~ INSERT CODE ~~~~
+  serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  serverSocket.bind(('', proxyPort))
+  serverSocket.listen(1)
   # ~~~~ END CODE INSERT ~~~~
   print ('Created socket')
 except:
