@@ -1,3 +1,24 @@
+#noting part:
+#request looks like:GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1
+#response like : 
+# HTTP/1.1 200 OK
+#Server: nginx
+#Date: Fri, 02 Oct 2015 11:54:02 GMT
+#Content-Type: application/json; charset=utf-8
+#Connection: close
+#Vary: Accept-Encoding
+#P3P: CP="Tumblr's privacy policy is available here:
+#	https://www.tumblr.com/policy/en/privacy"
+
+#{"meta":{"status":200,"msg":"OK"},"response":{"blog":{"title":"","name":"good","posts":2455,"url":"http:\/\/good.tumblr.com\/","updated":1439923053,"description":"*removed for brevity*","is_nsfw":false,"ask":true,"ask_page_title":"Ask GOOD a question","ask_anon":false,"uuid":
+#"good.tumblr.com","share_likes":true,"likes":430}}}
+
+
+#port number is commly 8080
+#host:depends on the get request, port number:80
+#where get:if in cache then done, if not then find orgin server
+
+
 # Include the libraries for socket and system calls
 import socket
 import sys
