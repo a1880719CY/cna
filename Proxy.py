@@ -206,20 +206,30 @@ while True:
       # ~~~~ INSERT CODE ~~~~
       clientSocket.sendall(cacheData)  #may have error if the result is a list, see if i need to fix later
       # ~~~~ END CODE INSERT ~~~~
+      
+      #decide whether save or not(404 case)
+      tempStorage = cacheData.decode()
+      upperLine = tempStorage.split('\r\n')[0]
+      statusCode = int(upperLine.split()[1])
+      
+      saveFile = True
+      if statusCode == 404:
+        saveFile = False
+      
+      if saveFile:
+        # Create a new file in the cache for the requested file.
+        cacheDir, file = os.path.split(cacheLocation)
+        print ('cached directory ' + cacheDir)
+        if not os.path.exists(cacheDir):
+          os.makedirs(cacheDir)
+        cacheFile = open(cacheLocation, 'wb')
 
-      # Create a new file in the cache for the requested file.
-      cacheDir, file = os.path.split(cacheLocation)
-      print ('cached directory ' + cacheDir)
-      if not os.path.exists(cacheDir):
-        os.makedirs(cacheDir)
-      cacheFile = open(cacheLocation, 'wb')
-
-      # Save origin server response in the cache file
-      # ~~~~ INSERT CODE ~~~~
-      cacheFile.write(cacheData)
-      # ~~~~ END CODE INSERT ~~~~
-      cacheFile.close()
-      print ('cache file closed')
+        # Save origin server response in the cache file
+        # ~~~~ INSERT CODE ~~~~
+        cacheFile.write(cacheData)
+        # ~~~~ END CODE INSERT ~~~~
+        cacheFile.close()
+        print ('cache file closed')
 
       # finished communicating with origin server - shutdown socket writes
       print ('origin response received. Closing sockets')
