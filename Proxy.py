@@ -147,7 +147,7 @@ while True:
     modifiedTime = os.path.getmtime(cacheLocation)
     age = time.time() - modifiedTime
     print(f"Age of the file is : {int (age)}")
-    if age >= maxAgeTime:
+    if age > maxAgeTime:
       print("Expried")
       raise Exception("Expried")
 
