@@ -26,6 +26,7 @@ import sys
 import os
 import argparse
 import re
+import time
 
 # 1MB buffer size
 BUFFER_SIZE = 1000000
@@ -135,6 +136,20 @@ while True:
     # Check wether the file is currently in the cache
     cacheFile = open(cacheLocation, "r")
     cacheData = cacheFile.readlines()
+    
+    cacheString = "".join(cacheData)
+    cacheControlMatch = re.search(r'Cache-Control:.*?max-age=(\d+)', cacheString, re.IGNORECASE)  #find the pattern
+    if cacheControlMatch:   
+      maxAgeTime = int(cacheControlMatch.group(1)) 
+    else:
+      None
+      
+    modifiedTime = os.path.getmtime(cacheLocation)
+    age = time.time() - modifiedTime
+    print(f"Age of the file is : {int (age)}")
+    if age >= maxAgeTime:
+      print("Expried")
+      raise Exception("Expried")
 
     print ('Cache hit! Loading from cache file: ' + cacheLocation)
     # ProxyServer finds a cache hit
