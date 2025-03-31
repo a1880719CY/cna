@@ -217,7 +217,6 @@ while True:
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
       cacheFile.write(cacheData)
-
       # ~~~~ END CODE INSERT ~~~~
       cacheFile.close()
       print ('cache file closed')
