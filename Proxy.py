@@ -140,12 +140,11 @@ while True:
     # ProxyServer finds a cache hit
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
-    print('hello')
     try:
       for line in cacheData:
-        clientSocket.send(line.encode('utf-8'))
-    except:
-      print("it bugged")
+        clientSocket.send(line.encode())
+    except Exception as e:
+        print(f"Error sending cached data: {e}")
 
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
