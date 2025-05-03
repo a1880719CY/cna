@@ -72,8 +72,9 @@ void A_output(struct msg message)
 
   /* if not blocked waiting on ACK */
   if ( windowcount < WINDOWSIZE) {
-    if (TRACE > 1)
+    if (TRACE > 1){
       printf("----A: New message arrives, send window is not full, send new messge to layer3!\n");
+    }
 
     /* create packet */
     sendpkt.seqnum = A_nextseqnum;
@@ -164,12 +165,15 @@ void A_input(struct pkt packet)
 void A_timerinterrupt(void)
 {
 
-  if (TRACE > 0){
-    printf("----A: time out,resend packets!\n");
+    if (TRACE > 0){
+
+        printf("----A: time out,resend packets!\n");
+
+    }
 
     if (TRACE > 0){
 
-      printf ("---A: resending packet %d\n", buffer[windowfirst].seqnum);
+        printf ("---A: resending packet %d\n", buffer[windowfirst].seqnum);
 
     }
 
@@ -181,7 +185,7 @@ void A_timerinterrupt(void)
         starttimer(A,RTT);
 
     }
-  }
+  
 }
 
 
@@ -205,7 +209,6 @@ void A_init(void)
 /********* Receiver (B)  variables and procedures ************/
 
 static int expectedseqnum; /* the sequence number expected next by the receiver */
-static int B_nextseqnum;   /* the sequence number for the next packets sent by B */
 
 static struct pkt recivedPkt[SEQSPACE];
 static bool recievedPktOrNot[SEQSPACE];
@@ -219,9 +222,10 @@ void B_input(struct pkt packet)
   int i;
 
   /* if not corrupted and received packet is in order */
-  if  ( (!IsCorrupted(packet)) ) {
-    if (TRACE > 0)
+  if  ( !IsCorrupted(packet)) {
+    if (TRACE > 0){
       printf("----B: packet %d is correctly received, send ACK!\n",packet.seqnum);
+    }
     packets_received++;
 
 
@@ -268,7 +272,6 @@ void B_input(struct pkt packet)
 void B_init(void)
 {
   expectedseqnum = 0;
-  B_nextseqnum = 1;
 }
 
 /******************************************************************************
