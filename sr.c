@@ -177,7 +177,7 @@ void A_timerinterrupt(void)
 
     }
 
-    tolayer3(A,buffer[(windowfirst)]);
+    tolayer3(A,buffer[windowfirst]);
     packets_resent++;
 
     if (windowcount > 0){
@@ -232,11 +232,11 @@ void B_input(struct pkt packet)
     if (recievedPktOrNot[packet.seqnum] == false){
 
         recievedPktOrNot[packet.seqnum] = true;
-        for (i = 0; i < 20; i++){
+        for (i = 0; i < 20; i++)
 
             recivedPkt[packet.seqnum].payload[i] = packet.payload[i];
 
-        }
+        
 
     }
 
@@ -252,11 +252,11 @@ void B_input(struct pkt packet)
     sendpkt.acknum = NOTINUSE;
 
     /* we don't have any data to send.  fill payload with 0's */
-    for ( i=0; i<20 ; i++ ){
+    
 
-        sendpkt.payload[i] = '0';
+    sendpkt.payload[i] = '0';
 
-    }
+    
 
     /* computer checksum */
     sendpkt.checksum = ComputeChecksum(sendpkt);
