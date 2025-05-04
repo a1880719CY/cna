@@ -240,7 +240,7 @@ void B_input(struct pkt packet)
 
     }
 
-    while (recievedPktOrNot[expectedseqnum] == true){
+    while (recievedPktOrNot[expectedseqnum]){
 
         tolayer5(B, packet.payload);
         recievedPktOrNot[expectedseqnum] = false;
@@ -249,12 +249,13 @@ void B_input(struct pkt packet)
     }
 
     sendpkt.acknum = packet.seqnum;
-    sendpkt.acknum = NOTINUSE;
+    sendpkt.seqnum = NOTINUSE;
 
     /* we don't have any data to send.  fill payload with 0's */
     
 
-    sendpkt.payload[i] = '0';
+    for ( i=0; i<20 ; i++ ) 
+    sendpkt.payload[i] = '0'; 
 
     
 
