@@ -173,7 +173,7 @@ void A_timerinterrupt(void)
 
     if (TRACE > 0){
 
-        printf ("---A: resending packet %d\n", buffer[windowfirst].seqnum);
+        printf ("---A: resending packet %d\n", (buffer[windowfirst]).seqnum);
 
     }
 
